@@ -10,5 +10,5 @@ import java.util.List;
  **/
 public interface CountryRepository {
     List<Country> findAll();
-    void save(Country country);
+    Country save(Country country);
 }

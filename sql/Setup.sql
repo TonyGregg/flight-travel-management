@@ -16,6 +16,10 @@ AND country  = 'France';
 
 select * from airlines
 where 1=1
+AND country  = 'India';
+
+select * from airlines
+where 1=1
 and name = 'Europe Air Lines';
 
 
