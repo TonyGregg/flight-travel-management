@@ -7,9 +7,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Antony Genil Gregory on 5/19/2019 12:51 PM
@@ -24,24 +26,37 @@ public class CountryController {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @GetMapping("/all")
-    public List<Country> getAll() {
+    public Map<String,Country> getAll() {
         logger.info("Inside getAll method of travel managment cache");
-        List<Country> countries = countryRepository.findAll();
-        if (countries!= null) {
-            logger.info("No. of countries "+countries.size());
+        Map<String,Country> countryMap = countryRepository.findAll();
+        if (countryMap!= null) {
+            logger.info("No. of countries "+countryMap.size());
         } else {
             logger.info("Sorry, no country information is available !!");
         }
-        return countries;
+        return countryMap;
 
 
     }
 
-    @PostMapping
+    @PostMapping("/create")
     @ResponseStatus(HttpStatus.CREATED)
     public Country save(@RequestBody @Valid Country country) {
         logger.info("Saving country "+country);
         return countryRepository.save(country);
+    }
+    @PostMapping("/delete")
+    @ResponseStatus(HttpStatus.OK)
+    public void delete(@RequestBody @Valid Country country) {
+
+        logger.info("deleting country "+country);
+        if (country.getName().length()>40) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Sorry country name too long");
+
+        }
+
+        countryRepository.removeCountry(country);
+
     }
 
 
