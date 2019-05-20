@@ -1,4 +1,4 @@
-package com.gen.travel.flight.management.apis;
+package com.gen.travel.flight.management.cache.apis;
 
 import com.gen.travel.flight.management.cache.model.Country;
 import com.gen.travel.flight.management.cache.repo.CountryRepository;
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
-import java.util.List;
+
 import java.util.Map;
 
 /**
@@ -18,7 +18,7 @@ import java.util.Map;
  * For project : flight-travel-management
  **/
 @RestController
-@RequestMapping("/api/v1/trav-mgmnt/country")
+@RequestMapping("/api/v1/trav-mgmnt/cache/country")
 public class CountryController {
 
     @Autowired

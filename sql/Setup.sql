@@ -1,3 +1,7 @@
+select * from user_cred;
+
+
+
 LOAD DATA  LOCAL INFILE 'C:\Users\anton\Documents\Tools\microservices\flight-travel-management\sql\airlines.dat' 
 REPLACE INTO TABLE airlines
 FIELDS TERMINATED BY ','
