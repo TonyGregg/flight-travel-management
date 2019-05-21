@@ -24,11 +24,7 @@ public class User {
 
     private String role;
 
-    public User(String email, String password, String role) {
-        this.email = email;
-        this.password = password;
-        this.role = role;
-    }
+
 
     public Long getId() {
         return id;
@@ -58,6 +54,15 @@ public class User {
         this.role = role;
     }
 
-    public User() {
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", role='" + role + '\'' +
+                '}';
     }
+
+
 }

@@ -9,6 +9,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
+
 /**
  * Created by Antony Genil Gregory on 5/20/2019 7:00 AM
  * For project : flight-travel-management
@@ -21,11 +23,13 @@ public class UserDetailServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 
-        User currentUser = userRepository.findByEmail(email);
+        User applicationUser = userRepository.findByEmail(email);
+        if (applicationUser == null) {
+            throw new UsernameNotFoundException(email);
+        }
+
         UserDetails userDetails = new org.springframework.security.core.userdetails.
-                User(email,currentUser.getPassword(), true,
-                true, true, true,
-                AuthorityUtils.createAuthorityList(currentUser.getRole()));
+                User(email,applicationUser.getPassword(), Collections.emptyList());
 
 
         return userDetails;
